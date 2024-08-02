@@ -5,4 +5,4 @@ To fulfill interview test from Unchained Game
 Just open ```index.html``` file
 
 ## Explanation:
-Open ```DESCRIPTION.txt``` file
+Open ```DESCRIPTION.md``` file
