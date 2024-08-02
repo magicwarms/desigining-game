@@ -1,5 +1,6 @@
-This is my solutions:
-
+## Types Design
+```
+- Actor: Stores information about a player or an enemy, including ID, name, class, health, abilities, inventory, passive abilities, and active effects.
 export type Actor = {
     id: string;
     name: string;
@@ -11,7 +12,9 @@ export type Actor = {
     passive: PassiveAbility;
     currentEffects: Effect[];
 };
-
+```
+```
+- Ability: Stores information about an ability that can be used in or out of battle, including ID, name, type, effect, and level.
 export type Ability = {
     id: string;
     name: string;
@@ -19,7 +22,9 @@ export type Ability = {
     effect: Effect;
     level: number;
 };
-
+```
+```
+- Effect: Stores information about the effects of an ability or item, including ID, name, type, duration, and impact on the target.
 export type Effect = {
     id: string;
     name: string;
@@ -27,20 +32,26 @@ export type Effect = {
     duration: number; // in turns
     impact: (target: Actor) => void;
 };
-
+```
+```
+- Item: Stores information about an item that can be used by an actor, including ID, name, and effects.
 export type Item = {
     id: string;
     name: string;
     effect: (target: Actor) => void;
 };
-
+```
+```
+- PassiveAbility: Stores information about a passive ability, including ID, name, effect, and level.
 export type PassiveAbility = {
     id: string;
     name: string;
     effect: (actor: Actor) => void;
     level: number;
 };
-
+```
+```
+- Battle: Stores information about a battle, including ID, start time, end time, player 1, player 2, whose turn it is, the winner, who fled, and the battle log.
 export type Battle = {
     id: string;
     startTime: number;
@@ -52,7 +63,9 @@ export type Battle = {
     coward?: string;
     log: BattleLogEntry[];
 };
-
+```
+```
+- BattleLogEntry: Stores a log of every action in a battle, including time, actor who performed the action, the action taken, target, result, and completion status.
 export type BattleLogEntry = {
     time: Date;
     actor: string;
@@ -61,18 +74,10 @@ export type BattleLogEntry = {
     result: string;
     finished: boolean;
 };
+```
+## Replayed Battle Mechanism
 
-Explanation:
-
-- Actor: Stores information about a player or an enemy, including ID, name, class, health, abilities, inventory, passive abilities, and active effects.
-- Ability: Stores information about an ability that can be used in or out of battle, including ID, name, type, effect, and level.
-- Effect: Stores information about the effects of an ability or item, including ID, name, type, duration, and impact on the target.
-- Item: Stores information about an item that can be used by an actor, including ID, name, and effects.
-- PassiveAbility: Stores information about a passive ability, including ID, name, effect, and level.
-- Battle: Stores information about a battle, including ID, start time, end time, player 1, player 2, whose turn it is, the winner, who fled, and the battle log.
-- BattleLogEntry: Stores a log of every action in a battle, including time, actor who performed the action, the action taken, target, result, and completion status.
-========================================================================||||========================================================================
-
+```
 This is how to implement a replayed battle so that users can continue from the most recent state and pick up the battle where they left off.
 +------------------------------------+
 |          Initial State             |
@@ -120,9 +125,9 @@ This is how to implement a replayed battle so that users can continue from the m
 |  - Apply actions to state          |
 |  - Final result                    |
 +------------------------------------+
-
-Diagram Explanation
-
+```
+### Diagram Explanation for Replayed Battle Mechanism
+```
 - Initial State Setup:
 When the battle begins, both actors (players) have an initial state that includes health, abilities, inventory, and ongoing effects.
 - Battle Log:
@@ -135,10 +140,10 @@ The latest state of the battle and actors is saved to the database or storage af
 When the page is refreshed or the player logs in again, the current state is retrieved from the database to continue the battle from the last point.
 - Battle Replay:
 To replay the battle, the action log is read from the beginning, and each action is applied to the initial state of the actors. This allows us to review the course of the battle.
-========================================================================||||========================================================================
+```
 
-SOME ENCHANCEMENTS:
-
+## Game Enchancements:
+```
 1. New Abilities
 
 - Area of Effect (AoE) Abilities: Abilities that affect more than one target in a single turn. For example, a fire attack that burns all enemies.
@@ -164,3 +169,4 @@ SOME ENCHANCEMENTS:
 6. PvP and PvE Enhancements
 - Ranked Matches: A ranked system for PvP battles that provides rewards based on performance.
 - Dynamic NPCs: NPCs with varying AI and unique challenges that provide a more engaging PvE experience.
+```
