@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Battle System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="battle-log"></div>
+    <button onclick="performAction('player1', 'attack', 'player2')">Player 1 Attack</button>
+    <button onclick="performAction('player1', 'effect', 'player2')">Player 1 Attack with Ability (poison)</button>
+    <button onclick="performAction('player1', 'combo', 'player2')">Player 1 Attack with Combo (combo attack press 3
+        times)</button>
+    <button onclick="performAction('player1', 'heal', 'player1')">Player 1 use Potion</button>
+    <button onclick="performAction('player2', 'attack', 'player1')">Player 2 Attack</button>
+    <script src="script.js"></script>
+</body>
+
+</html>
